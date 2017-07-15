@@ -1,0 +1,14 @@
+@import 'colors';
+
+.tags-label {
+    font-size: 16px;
+    color: $accent;
+    &.left {
+        margin: 10px 0 0 10px;
+        text-align: left;
+    }
+    &.right {
+        margin: 10px 10px 0 0;
+        text-align: right;
+    }
+}

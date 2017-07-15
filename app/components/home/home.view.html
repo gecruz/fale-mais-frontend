@@ -1,0 +1,82 @@
+<div ng-cloak ng-init="ctrl.init()">
+  <div layout-gt-sm="row" layout="column" layout-align="start start">
+
+    
+    <md-card flex-gt-sm="50" flex>
+
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Comparação de minutos</span>
+          <div class="md-subhead">
+            <p>Por favor, preencha com as informações da ligação:</p>
+          </div>
+        </md-card-title-text>
+      </md-card-title>
+
+      <md-card-content layout="column" layout-align="start">
+
+        <div layout="row" layout-align="start space-around" ng-cloak>
+
+          <md-input-container>
+            <label>Origem</label>
+            <md-select placeholder="Origem" ng-model="ctrl.call.origin" md-on-open="ctrl.loadUsers()">
+              <md-option ng-value="user" ng-repeat="user in ctrl.users">{{user.name}}</md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container>
+            <label>Destino</label>
+            <md-select placeholder="Destino" ng-model="ctrl.call.destiny" md-on-open="ctrl.loadUsers()">
+              <md-option ng-value="user" ng-repeat="user in ctrl.users">{{user.name}}</md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="25" flex-xs="50" md-no-asterisk>
+            <label>Minutos</label>
+            <input ng-model="ctrl.call.minutes" type="number" min=1 required md-no-asterisk>
+          </md-input-container>
+
+          <md-input-container>
+            <label>Plano</label>
+            <md-select placeholder="Plano" ng-model="ctrl.call.plan" md-on-open="ctrl.loadUsers()">
+              <md-option ng-value="user" ng-repeat="user in ctrl.users">{{user.name}}</md-option>
+            </md-select>
+          </md-input-container>
+
+        </div>
+
+      </md-card-content>
+    </md-card>
+
+    <!-- Results -->
+    <md-card flex-gt-sm="50" flex>
+
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Resultados</span>
+        </md-card-title-text>
+      </md-card-title>
+
+      <md-card-content layout="column" layout-align="start">
+
+        <md-content>
+          <md-list flex>
+            <md-list-item class="md-3-line" ng-repeat="item in ctrl.plans" ng-click="null">
+              <div class="md-list-item-text" layout="column">
+                <h3>{{ item.name }}</h3>
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.name }}</p>
+              </div>
+            </md-list-item>
+            <md-divider></md-divider>
+
+          </md-list>
+        </md-content>
+
+      </md-card-content>
+
+    </md-card>
+
+  </div>
+
+</div>
