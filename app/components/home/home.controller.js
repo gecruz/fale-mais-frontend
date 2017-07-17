@@ -42,7 +42,6 @@ export default class HomeController {
         .then(res => {
           if (res.data) {
             this.plans = res.data
-            console.log(this.plans)
           } else {
             this._$mdToast.show(this._$mdToast.simple().textContent('Something went wrong'))
           }
@@ -54,10 +53,22 @@ export default class HomeController {
   }
 
   calculate (call) {
-    console.log(call)
     let result = {
-
+      origin: call.origin.origin,
+      destination: call.destination.destination,
+      minutes: call.minutes,
+      plan: call.plan.name,
+      noPlanValue: (call.minutes * call.destination.fare).toFixed(2),
+      planValue: undefined
     }
+
+    if (call.plan.minutes >= call.minutes) {
+      result.planValue = 0
+    } else {
+      result.planValue = ((call.minutes - call.plan.minutes) * (call.destination.fare * 1.1).toFixed(2))
+    }
+    console.log('call: ', call)
+    console.log('result: ', result)
     this.add(result, this.results)
   }
 
