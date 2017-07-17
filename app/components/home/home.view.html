@@ -1,5 +1,5 @@
 <div ng-cloak ng-init="ctrl.init()">
-  <div layout-gt-sm="row" layout="column" layout-align="start start">
+  <div layout="row"  layout-align="start start" flex>
 
 
     <md-card flex="50">
@@ -16,28 +16,28 @@
       <md-card-content layout="column" layout-align="start">
         <form name="Form">
 
-          <div layout="row" layout-align="start space-around" ng-cloak>
+          <div flex layout-wrap layout-xs="row" layout-align-xs="end" layout="row" layout-align="start space-around" ng-cloak>
 
-            <md-input-container>
+            <md-input-container flex-xs="50">
               <label>Origem</label>
               <md-select required placeholder="Origem" ng-model="ctrl.call.origin" md-on-open="ctrl.getOrigins()">
                 <md-option ng-value="item" ng-repeat="item in ctrl.origins">{{item.origin}}</md-option>
               </md-select>
             </md-input-container>
 
-            <md-input-container>
+            <md-input-container flex-xs="50">
               <label>Destino</label>
               <md-select required ng-disabled="!ctrl.call.origin" placeholder="Destino" ng-model="ctrl.call.destination">
                 <md-option ng-value="item" ng-repeat="item in ctrl.call.origin.destinations">{{item.destination}}</md-option>
               </md-select>
             </md-input-container>
 
-            <md-input-container class="md-block" flex-gt-sm="25" flex-xs="50" md-no-asterisk>
+            <md-input-container class="md-block" flex-xs="50" md-no-asterisk>
               <label>Minutos</label>
               <input required ng-model="ctrl.call.minutes" type="number" min=1 required md-no-asterisk>
             </md-input-container>
 
-            <md-input-container>
+            <md-input-container flex-xs="50">
               <label>Plano</label>
               <md-select required placeholder="Plano" ng-model="ctrl.call.plan" md-on-open="ctrl.getPlans()">
                 <md-option ng-value="item" ng-repeat="item in ctrl.plans">{{item.name}}</md-option>
