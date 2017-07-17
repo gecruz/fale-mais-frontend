@@ -1,97 +1,73 @@
 import './home.view.html'
-import './show.dialog.html'
 
 export default class HomeController {
-  constructor (RegionsService, PlansService, $mdToast, $mdDialog, $timeout) {
+  constructor (DestinationsService, PlansService, $mdToast, $mdDialog, $timeout) {
     'ngInject'
 
-    this._RegionsService = RegionsService
+    this._DestinationsService = DestinationsService
     this._PlansService = PlansService
     this._$mdToast = $mdToast
     this._$mdDialog = $mdDialog
     this._$timeout = $timeout
-  }
 
-  loadUsers () {
-    // Use timeout to simulate a request.
-    return this._$timeout(() => {
-      this.users = this.users || [
-        { id: 1, name: 'Scooby Doo' },
-        { id: 2, name: 'Shaggy Rodgers' },
-        { id: 3, name: 'Fred Jones' },
-        { id: 4, name: 'Daphne Blake' },
-        { id: 5, name: 'Velma Dinkley' }
-      ]
-    }, 650)
-  }
-
-  listItemClick (index) {
-    var clickedItem = this.items[index]
-    this._$mdBottomSheet.hide(clickedItem)
+    this.results = []
   }
 
   init () {
-    this.getRegions()
+    this.getDestinations()
     this.getPlans()
   }
 
-  getRegions () {
-    this._RegionsService
-      .getAllRegions()
-      .then(res => {
-        if (res.data) {
-          this.regions = res.data
-        } else {
-          this._$mdToast.show(this._$mdToast.simple().textContent('Something went wrong'))
-        }
-      })
-      .catch(err => {
-        console.error(err)
-      })
+  getDestinations () {
+    return this._$timeout(() => {
+      this._DestinationsService
+        .getAllDestinations()
+        .then(res => {
+          if (res.data) {
+            this.origins = res.data
+          } else {
+            this._$mdToast.show(this._$mdToast.simple().textContent('Something went wrong'))
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }, 100)
   }
 
   getPlans () {
-    this._PlansService
-      .getAllPlans()
-      .then(res => {
-        if (res.data) {
-          this.plans = res.data
-          console.log(this.plans)
-        } else {
-          this._$mdToast.show(this._$mdToast.simple().textContent('Something went wrong'))
-        }
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    return this._$timeout(() => {
+      this._PlansService
+        .getAllPlans()
+        .then(res => {
+          if (res.data) {
+            this.plans = res.data
+            console.log(this.plans)
+          } else {
+            this._$mdToast.show(this._$mdToast.simple().textContent('Something went wrong'))
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }, 100)
   }
 
-  showDialog (event) {
-    this.alert = this._$mdDialog.show({
-      templateUrl: require('./show.dialog.html'),
-      clickOutsideToClose: true,
-      controller: () => this,
-      controllerAs: 'ctrl',
-      fullscreen: true,
-      targetEvent: event
-    })
-  }
+  calculate (call) {
+    console.log(call)
+    let result = {
 
-  closeDialog () {
-    this._$mdDialog.hide()
-  }
-
-  exists (item, list) {
-    return list.includes(item)
-  }
-
-  toggle (item, list) {
-    let idx = list.indexOf(item)
-    if (idx > -1) {
-      list.splice(idx, 1)
-    } else {
-      list.push(item)
     }
+    this.add(result, this.results)
+  }
+
+  add (item, list) {
+    list.push(item)
+  }
+
+  remove (item, list) {
+    let idx = list.indexOf(item)
+    list.splice(idx, 1)
   }
 
 }

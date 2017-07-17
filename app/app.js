@@ -3,7 +3,7 @@ import ToolbarController from './shared/toolbar/toolbar.controller.js'
 import HomeController from './components/home/home.controller.js'
 import SigninController from './components/auth/signin/signin.controller.js'
 import SignupController from './components/auth/signup/signup.controller.js'
-import RegionsService from './services/regions.service.js'
+import DestinationsService from './services/destinations.service.js'
 import PlansService from './services/plans.service.js'
 
 const app = angular.module('App', [
@@ -29,7 +29,7 @@ app
   .controller('HomeController', HomeController)
   .controller('SigninController', SigninController)
   .controller('SignupController', SignupController)
-  .service('RegionsService', RegionsService)
+  .service('DestinationsService', DestinationsService)
   .service('PlansService', PlansService)
 
 app.constant('API', 'http://localhost:3000/api')
