@@ -32,4 +32,4 @@ app
   .service('DestinationsService', DestinationsService)
   .service('PlansService', PlansService)
 
-app.constant('API', 'http://localhost:3000/api')
+app.constant('API', 'http://localhost:1337')
