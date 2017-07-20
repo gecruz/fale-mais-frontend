@@ -7,6 +7,8 @@ To get the Angular app running locally:
 - Clone this repo
 - `npm install` to install all required dependencies
 - `npm install -g protractor` Install Protractor ([instructions](http://www.protractortest.org/#/tutorial))
+- `webdriver-manager update` to update Selenium Server instance
+- `webdriver-manager start` to start up Selenium Server
 - `npm start` to start the app
 - `npm test` to test the app
 
