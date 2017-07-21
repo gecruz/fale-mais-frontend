@@ -1,7 +1,7 @@
 import './home.view.html'
 
 export default class HomeController {
-  constructor (DestinationsService, PlansService, $mdToast, $mdDialog, $timeout) {
+  constructor (DestinationsService, PlansService, $mdToast, $mdDialog, $timeout, $scope) {
     'ngInject'
 
     this._DestinationsService = DestinationsService
@@ -9,8 +9,10 @@ export default class HomeController {
     this._$mdToast = $mdToast
     this._$mdDialog = $mdDialog
     this._$timeout = $timeout
+    this._$scope = $scope
 
     this.results = []
+    this.call = {}
   }
 
   init () {
@@ -68,6 +70,10 @@ export default class HomeController {
       result.planValue = ((call.minutes - call.plan.minutes) * (call.destination.fare * 1.1).toFixed(2))
     }
     this.add(result, this.results)
+
+    this.init()
+    this.call = {}
+    this._$scope.Form.$setUntouched()
   }
 
   add (item, list) {

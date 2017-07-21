@@ -20,14 +20,14 @@
 
             <md-input-container flex-xs="50">
               <label>Origem</label>
-              <md-select required placeholder="Origem" ng-model="ctrl.call.origin" md-on-open="ctrl.getOrigins()">
+              <md-select md-no-asterisk required placeholder="Origem" ng-model="ctrl.call.origin" md-on-open="ctrl.getOrigins()">
                 <md-option name="origin" class="origin" ng-value="item" ng-repeat="item in ctrl.origins">{{item.origin}}</md-option>
               </md-select>
             </md-input-container>
 
             <md-input-container flex-xs="50">
               <label>Destino</label>
-              <md-select required ng-disabled="!ctrl.call.origin" placeholder="Destino" ng-model="ctrl.call.destination">
+              <md-select md-no-asterisk required ng-disabled="!ctrl.call.origin" placeholder="Destino" ng-model="ctrl.call.destination">
                 <md-option name="destination" class="destination" ng-value="item" ng-repeat="item in ctrl.call.origin.destinations">{{item.destination}}</md-option>
               </md-select>
             </md-input-container>
@@ -43,7 +43,7 @@
 
             <md-input-container flex-xs="50">
               <label>Plano</label>
-              <md-select required placeholder="Plano" ng-model="ctrl.call.plan" md-on-open="ctrl.getPlans()">
+              <md-select md-no-asterisk required placeholder="Plano" ng-model="ctrl.call.plan" md-on-open="ctrl.getPlans()">
                 <md-option name="plan" class="plan" ng-value="item" ng-repeat="item in ctrl.plans">{{item.name}}</md-option>
               </md-select>
             </md-input-container>
