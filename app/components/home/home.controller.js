@@ -67,8 +67,6 @@ export default class HomeController {
     } else {
       result.planValue = ((call.minutes - call.plan.minutes) * (call.destination.fare * 1.1).toFixed(2))
     }
-    console.log('call: ', call)
-    console.log('result: ', result)
     this.add(result, this.results)
   }
 

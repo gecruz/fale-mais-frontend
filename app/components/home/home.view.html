@@ -1,5 +1,5 @@
 <div ng-cloak ng-init="ctrl.init()">
-  <div layout="row"  layout-align="start start" flex>
+  <div layout="row" layout-align="start start" flex>
 
 
     <md-card flex="50">
@@ -16,35 +16,39 @@
       <md-card-content layout="column" layout-align="start">
         <form name="Form">
 
-          <div flex layout-wrap layout-xs="row" layout-align-xs="end" layout="row" layout-align="start space-around" ng-cloak>
+          <div class="formTest" flex layout-wrap layout-xs="row" layout-align-xs="end" layout="row" layout-align="start space-around">
 
             <md-input-container flex-xs="50">
               <label>Origem</label>
               <md-select required placeholder="Origem" ng-model="ctrl.call.origin" md-on-open="ctrl.getOrigins()">
-                <md-option ng-value="item" ng-repeat="item in ctrl.origins">{{item.origin}}</md-option>
+                <md-option name="origin" class="origin" ng-value="item" ng-repeat="item in ctrl.origins">{{item.origin}}</md-option>
               </md-select>
             </md-input-container>
 
             <md-input-container flex-xs="50">
               <label>Destino</label>
               <md-select required ng-disabled="!ctrl.call.origin" placeholder="Destino" ng-model="ctrl.call.destination">
-                <md-option ng-value="item" ng-repeat="item in ctrl.call.origin.destinations">{{item.destination}}</md-option>
+                <md-option name="destination" class="destination" ng-value="item" ng-repeat="item in ctrl.call.origin.destinations">{{item.destination}}</md-option>
               </md-select>
             </md-input-container>
 
-            <md-input-container class="md-block" flex-xs="50" md-no-asterisk>
+            <md-input-container class="md-block" flex-xs="50">
               <label>Minutos</label>
-              <input required ng-model="ctrl.call.minutes" type="number" min=1 required md-no-asterisk>
+              <input md-no-asterisk name="minutes" class="minutes" required ng-model="ctrl.call.minutes" type="number" min=1 required md-no-asterisk>
+              <div name="errors" ng-messages="Form.minutes.$error">
+                <div ng-message="required">Por favor, preencha o valor</div>
+                <div ng-message="min">Tempo de ligação nçao pode ser menor que 0</div>
+              </div>
             </md-input-container>
 
             <md-input-container flex-xs="50">
               <label>Plano</label>
               <md-select required placeholder="Plano" ng-model="ctrl.call.plan" md-on-open="ctrl.getPlans()">
-                <md-option ng-value="item" ng-repeat="item in ctrl.plans">{{item.name}}</md-option>
+                <md-option name="plan" class="plan" ng-value="item" ng-repeat="item in ctrl.plans">{{item.name}}</md-option>
               </md-select>
             </md-input-container>
 
-            <md-button ng-disabled="Form.$invalid" ng-click="ctrl.calculate(ctrl.call)" class="md-fab" aria-label="Calculate">
+            <md-button name="calculate" ng-disabled="Form.$invalid" ng-click="ctrl.calculate(ctrl.call)" class="md-fab" aria-label="Calculate">
               <md-icon>arrow_forward</md-icon>
             </md-button>
 
@@ -76,10 +80,19 @@
 
             <md-list-item class="md-3-line" ng-repeat="item in ctrl.results track by $index" ng-click="null">
               <div class="md-list-item-text" layout="column">
-                <h3>{{item.minutes}} Minutos de ligação de {{ ::item.origin }} para {{ ::item.destination }}</h3>
-                <h4><strong>No plano {{ ::item.plan }}: {{ ::item.planValue | currency: "R$: " : fractionSize }}</strong></h4>
-                <h4>Sem plano: {{ ::item.noPlanValue | currency: "R$: " : fractionSize }}</h4>
-                <p>{{ ::item.name }}</p>
+                <h3>
+                  <span name="minutesResult"> {{::item.minutes}} </span> Minutos de ligação de
+                  <span name="originResult"> {{::item.origin}} </span> para <span name="destinationResult"> {{::item.destination}} </span>
+                </h3>
+                <h4>
+                  <strong>No plano <span name="planResult"> {{::item.plan}} </span> <span name="planValueResult"> {{::item.planValue | currency: 'R$: ' : fractionSize}} </span> </strong>
+                </h4>
+                <h4>
+                  Sem plano <span name="noPlanValueResult"> {{::item.noPlanValue | currency: 'R$: ' : fractionSize}} </span>
+                </h4>
+                <p>
+                  <span name="nameResult"> {{::item.name}} </span>
+                </p>
               </div>
               <md-divider></md-divider>
             </md-list-item>
