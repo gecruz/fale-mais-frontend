@@ -12,6 +12,13 @@ To get the Angular app running locally:
 - `npm start` to start the app
 - `npm test` to test the app
 
+### Deploying
+
+* `npm install -g surge`
+* `npm run build`
+* `mv dist/index.html dist/200.html`
+* `surge dist your-project-name.surge.sh`
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
